@@ -24,8 +24,7 @@ jobs:
       - name: Generate missing android/ios platform folders
         run: |
           if [ ! -d "android" ]; then
-            flutter create . --platforms=android --org com.premiumreader.app
-          fi
+            flutter create . --platforms=android --org com.premiumreader.app --project-name premium_ebook_reader
 
       - name: Install dependencies
         run: flutter pub get
