@@ -28,7 +28,14 @@ jobs:
 
       - name: Bump compileSdk to 36
         run: |
-          find android -name "build.gradle*" -exec sed -i 's/compileSdk = flutter.compileSdkVersion/compileSdk = 36/g; s/compileSdkVersion flutter.compileSdkVersion/compileSdkVersion 36/g' {} \;
+          for f in android/app/build.gradle.kts android/app/build.gradle; do
+            if [ -f "$f" ]; then
+              sed -E -i 's/compileSdk[[:space:]]*=[[:space:]]*flutter\.compileSdkVersion/compileSdk = 36/' "$f"
+              sed -E -i 's/compileSdkVersion[[:space:]]+flutter\.compileSdkVersion/compileSdkVersion 36/' "$f"
+              echo "===== Content of $f ====="
+              cat "$f"
+            fi
+          done
 
       - name: Install dependencies
         run: flutter pub get
