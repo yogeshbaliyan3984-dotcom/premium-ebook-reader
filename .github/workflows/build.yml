@@ -1,3 +1,4 @@
+
 name: Build Android APK
 
 on:
@@ -25,6 +26,7 @@ jobs:
         run: |
           if [ ! -d "android" ]; then
             flutter create . --platforms=android --org com.premiumreader.app --project-name premium_ebook_reader
+          fi
 
       - name: Install dependencies
         run: flutter pub get
