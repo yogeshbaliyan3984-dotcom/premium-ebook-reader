@@ -1,0 +1,36 @@
+name: premium_ebook_reader
+description: A premium, feature-rich offline PDF eBook reader with native book-like feel.
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.2.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_pdfview: ^1.3.2
+  pdfx: ^2.6.0
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+  shared_preferences: ^2.2.3
+  path_provider: ^2.1.3
+  provider: ^6.1.2
+  wakelock_plus: ^1.2.5
+  screen_brightness: ^1.0.1
+  google_fonts: ^6.2.1
+  flutter_svg: ^2.0.10+1
+  intl: ^0.19.0
+  file_picker: ^8.0.3
+  path: ^1.9.0
+  cupertino_icons: ^1.0.8
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  hive_generator: ^2.0.1
+  build_runner: ^2.4.9
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
