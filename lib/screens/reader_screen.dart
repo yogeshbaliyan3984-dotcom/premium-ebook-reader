@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
-import 'package:screen_brightness/screen_brightness.dart';
 
 import '../services/storage_service.dart';
 import '../models/bookmark.dart';
@@ -36,7 +35,6 @@ class _ReaderScreenState extends State<ReaderScreen> {
   bool _isVerticalScroll = false;
   ReadingMode _readingMode = ReadingMode.light;
 
-  double? _originalBrightness;
   Timer? _progressSaveDebounce;
 
   @override
@@ -44,13 +42,11 @@ class _ReaderScreenState extends State<ReaderScreen> {
     super.initState();
     _restoreProgress();
     _enableWakelock();
-    _captureOriginalBrightness();
   }
 
   @override
   void dispose() {
     WakelockPlus.disable();
-    _restoreBrightness();
     _progressSaveDebounce?.cancel();
     if (_isFullscreen) {
       SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
@@ -60,22 +56,6 @@ class _ReaderScreenState extends State<ReaderScreen> {
 
   Future<void> _enableWakelock() async {
     await WakelockPlus.enable();
-  }
-
-  Future<void> _captureOriginalBrightness() async {
-    try {
-      _originalBrightness = await ScreenBrightness().current;
-    } catch (_) {}
-  }
-
-  Future<void> _restoreBrightness() async {
-    try {
-      if (_originalBrightness != null) {
-        await ScreenBrightness().setScreenBrightness(_originalBrightness!);
-      } else {
-        await ScreenBrightness().resetScreenBrightness();
-      }
-    } catch (_) {}
   }
 
   void _restoreProgress() {
